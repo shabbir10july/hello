@@ -17,17 +17,8 @@ jobs:
         uses: actions/setup-go@v1
         with:
           go-version: ${{ matrix.go_version }}
-      - name: Build with xgo
-        uses: crazy-max/ghaction-xgo@v1
-        with:
-          xgo_version: latest
-          go_version: ${{ matrix.go_version }}
-          dest: build
-          prefix: autocannon-go
-          targets: linux/amd64
-          v: true
-          x: false
-          ldflags: -s -w
+      - name: Build 
+        run: go build hello.go
       - name: Create Release
         uses: actions/create-release@v1.0.0
         id: create_release
@@ -39,7 +30,6 @@ jobs:
           draft: false
           prerelease: false
       - name: Upload Release Assets
-        uses: glentiki/xbin-release-action@v1.0.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
