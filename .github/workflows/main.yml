@@ -8,12 +8,12 @@ jobs:
   release:
     strategy:
       matrix:
-        go_version: [1.13.x]
+        go_version: [1.10.x]
     runs-on: self-hosted
     steps:
       - name: Checkout
         uses: actions/checkout@v1
-      - name: Set up Go 1.13
+      - name: Set up Go 1.10
         uses: actions/setup-go@v1
         with:
           go-version: ${{ matrix.go_version }}
