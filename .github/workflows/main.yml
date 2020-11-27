@@ -8,17 +8,22 @@ jobs:
   release:
     strategy:
       matrix:
-        go_version: [1.10.x]
+        go_version: [1.15.x]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v1
-      - name: Set up Go 1.10
+      - name: Set up Go 1.15
         uses: actions/setup-go@v1
         with:
           go-version: ${{ matrix.go_version }}
-      - name: Build 
-        run: go build hello.go
+      - name: go-cross-build
+        # You may pin to the exact commit or the version.
+        # uses: thatisuday/go-cross-build@542468fed9c6be3220a6cead66abff3943e41a5d
+        uses: thatisuday/go-cross-build@v1.1.0
+        with:
+          # Comma-separated list of "<kernel>/<arch>" combinations.
+          platforms: linux/386,linux/amd64
       - name: Create Release
         uses: actions/create-release@v1.0.0
         id: create_release
