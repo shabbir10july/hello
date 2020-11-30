@@ -1,7 +1,9 @@
-package hello
+//go:binary-only-package
+
+package main
 
 import "fmt"
 
-func Print_hello() {
+func main() {
     fmt.Println("hello world")
 }
